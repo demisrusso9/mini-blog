@@ -1,7 +1,10 @@
-import { Form, FormFieldsProps } from '@/components/form'
+import {
+	RegisterForm,
+	RegisterFormFieldsProps
+} from '@/components/register-form'
 
 export function Register() {
-	function handleSubmitForm(data: FormFieldsProps) {
+	function handleSubmitForm(data: RegisterFormFieldsProps) {
 		console.log(data)
 	}
 
@@ -13,7 +16,7 @@ export function Register() {
 				Crie seu usuário e compartilhe suas histórias
 			</p>
 
-			<Form handleSubmitForm={handleSubmitForm} />
+			<RegisterForm handleSubmitForm={handleSubmitForm} />
 		</div>
 	)
 }

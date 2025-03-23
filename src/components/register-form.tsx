@@ -3,20 +3,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-export type FormFieldsProps = z.infer<typeof registerSchema>
+export type RegisterFormFieldsProps = z.infer<typeof registerSchema>
 
-interface FormProps {
-	handleSubmitForm(data: FormFieldsProps): void
+interface RegisterFormProps {
+	handleSubmitForm(data: RegisterFormFieldsProps): void
 }
 
-interface FormFieldId {
+interface FormFieldMap {
 	id: 'name' | 'email' | 'password' | 'confirm_password'
 	title: string
 	type: string
 	placeholder: string
 }
 
-export function Form({ handleSubmitForm }: FormProps) {
+export function RegisterForm({ handleSubmitForm }: RegisterFormProps) {
 	const {
 		handleSubmit,
 		register,
@@ -25,7 +25,7 @@ export function Form({ handleSubmitForm }: FormProps) {
 		resolver: zodResolver(registerSchema)
 	})
 
-	const formFields: FormFieldId[] = [
+	const formFields: FormFieldMap[] = [
 		{
 			id: 'name',
 			title: 'Nome:',
