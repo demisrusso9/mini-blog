@@ -26,6 +26,7 @@ MiniBlog is a simple blogging platform where users can create, view, and manage 
 ### Home
 
 - All users (guests and logged-in) can view public posts.
+  Posts will have: img, title, author, tags and a button to see the full post
 
 ### Post Creation
 

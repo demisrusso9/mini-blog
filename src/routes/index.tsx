@@ -1,5 +1,6 @@
 import { AppLayout } from '@/layout/app-layout'
 import { About } from '@/pages/about'
+import { Dashboard } from '@/pages/dashboard'
 import { Home } from '@/pages/home'
 import { Login } from '@/pages/login'
 import { NotFound } from '@/pages/not-found'
@@ -13,6 +14,7 @@ export function AppRoutes() {
 			<Routes>
 				<Route element={<AppLayout />}>
 					<Route path="/" element={<Home />} />
+					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/about" element={<About />} />
