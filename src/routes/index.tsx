@@ -1,3 +1,4 @@
+import { Post } from '@/components/post'
 import { AppLayout } from '@/layout/app-layout'
 import { About } from '@/pages/about'
 import { Dashboard } from '@/pages/dashboard'
@@ -14,6 +15,19 @@ export function AppRoutes() {
 			<Routes>
 				<Route element={<AppLayout />}>
 					<Route path="/" element={<Home />} />
+					<Route
+						path="/post"
+						element={
+							<Post
+								imgUrl="https://images3.alphacoders.com/133/thumb-1920-1334079.png"
+								title="forza motorsport"
+								description="lorem"
+								author="demis"
+								tags={['game', 'xbox', 'abc', 'test', '123']}
+								isHomeView={false}
+							/>
+						}
+					/>
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
