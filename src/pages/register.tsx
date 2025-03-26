@@ -1,11 +1,26 @@
+import { createUser } from '@/api/create-user'
 import {
 	RegisterForm,
 	RegisterFormFieldsProps
 } from '@/components/register-form'
+import { FirebaseError } from 'firebase/app'
+import { toast } from 'react-toastify'
 
 export function Register() {
-	function handleSubmitForm(data: RegisterFormFieldsProps) {
-		console.log(data)
+	async function handleSubmitForm({
+		name,
+		email,
+		password
+	}: RegisterFormFieldsProps) {
+		try {
+			await createUser({ name, email, password })
+		} catch (error: unknown) {
+			if (error instanceof FirebaseError) {
+				if (error.code === 'auth/email-already-in-use') {
+					toast.error('E-mail já existe')
+				}
+			}
+		}
 	}
 
 	return (
