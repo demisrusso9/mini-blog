@@ -21,3 +21,10 @@ export const loginSchema = z.object({
 	email: z.string().email({ message: 'E-mail inválido.' }),
 	password: z.string()
 })
+
+export const postSchema = z.object({
+	title: z.string().min(4, { message: 'No mínimo 4 caracteres' }),
+	image_url: z.string().url({ message: 'URL inválida' }),
+	body: z.string(),
+	tags: z.string()
+})

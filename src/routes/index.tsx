@@ -1,4 +1,3 @@
-import { Post } from '@/components/post'
 import { AppLayout } from '@/layout/app-layout'
 import { AuthLayout } from '@/layout/auth-layout'
 import { About } from '@/pages/about'
@@ -6,6 +5,7 @@ import { Dashboard } from '@/pages/dashboard'
 import { Home } from '@/pages/home'
 import { Login } from '@/pages/login'
 import { NotFound } from '@/pages/not-found'
+import { Posts } from '@/pages/posts'
 import { Register } from '@/pages/register'
 
 import { BrowserRouter, Route, Routes } from 'react-router'
@@ -15,7 +15,7 @@ export function AppRoutes() {
 		<BrowserRouter>
 			<Routes>
 				<Route element={<AppLayout />}>
-					<Route
+					{/* <Route
 						path="/post"
 						element={
 							<Post
@@ -27,7 +27,8 @@ export function AppRoutes() {
 								isHomeView={false}
 							/>
 						}
-					/>
+					/> */}
+					<Route path="/create-post" element={<Posts />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>
 
