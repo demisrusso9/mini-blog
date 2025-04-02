@@ -1,4 +1,8 @@
+import { signInUser } from '@/api/sign-in-user'
 import { LoginForm } from '@/components/login-form'
+import { FirebaseError } from 'firebase/app'
+import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 
 export interface LoginFormFieldsProps {
 	email: string
@@ -6,8 +10,19 @@ export interface LoginFormFieldsProps {
 }
 
 export function Login() {
-	function handleSubmitForm(data: LoginFormFieldsProps) {
-		console.log(data)
+	const navigate = useNavigate()
+
+	async function handleSubmitForm({ email, password }: LoginFormFieldsProps) {
+		try {
+			await signInUser({ email, password })
+			navigate('/dashboard', { replace: true })
+		} catch (error) {
+			if (error instanceof FirebaseError) {
+				if (error.code === 'auth/invalid-credential') {
+					toast.error('Credenciais inválidas')
+				}
+			}
+		}
 	}
 
 	return (

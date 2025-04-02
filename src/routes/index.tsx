@@ -1,5 +1,6 @@
 import { Post } from '@/components/post'
 import { AppLayout } from '@/layout/app-layout'
+import { AuthLayout } from '@/layout/auth-layout'
 import { About } from '@/pages/about'
 import { Dashboard } from '@/pages/dashboard'
 import { Home } from '@/pages/home'
@@ -14,7 +15,6 @@ export function AppRoutes() {
 		<BrowserRouter>
 			<Routes>
 				<Route element={<AppLayout />}>
-					<Route path="/" element={<Home />} />
 					<Route
 						path="/post"
 						element={
@@ -29,6 +29,10 @@ export function AppRoutes() {
 						}
 					/>
 					<Route path="/dashboard" element={<Dashboard />} />
+				</Route>
+
+				<Route element={<AuthLayout />}>
+					<Route path="/" element={<Home />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/about" element={<About />} />

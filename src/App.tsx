@@ -1,10 +1,14 @@
 import { AppRoutes } from '@/routes'
+import { queryClient } from '@/services/react-query'
+import { QueryClientProvider } from '@tanstack/react-query'
 import { Bounce, ToastContainer } from 'react-toastify'
 
 function App() {
 	return (
 		<>
-			<AppRoutes />
+			<QueryClientProvider client={queryClient}>
+				<AppRoutes />
+			</QueryClientProvider>
 
 			<ToastContainer
 				position="top-center"

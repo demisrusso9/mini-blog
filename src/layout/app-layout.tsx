@@ -1,8 +1,23 @@
+import { getUser } from '@/api/get-user'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
-import { Outlet } from 'react-router'
+import { useQuery } from '@tanstack/react-query'
+import { Outlet, useNavigate } from 'react-router'
 
 export function AppLayout() {
+	const navigate = useNavigate()
+
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: getUser
+	})
+
+	console.log({ user })
+
+	if (!user) {
+		navigate('/login')
+	}
+
 	return (
 		<div className="flex min-h-screen flex-col">
 			<Header />
