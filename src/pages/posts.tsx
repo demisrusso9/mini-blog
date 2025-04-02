@@ -1,8 +1,17 @@
+import { createPost } from '@/api/create-post'
 import { CreatePost, CreatePostFieldsProps } from '@/components/create-post'
+import { useNavigate } from 'react-router'
 
 export function Posts() {
+	const navigate = useNavigate()
+
 	async function handleSubmitForm(data: CreatePostFieldsProps) {
-		console.log({ data })
+		try {
+			await createPost(data)
+			navigate('/dashboard')
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (
