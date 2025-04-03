@@ -1,18 +1,8 @@
 import { getAuth } from 'firebase/auth'
 import { addDoc, collection } from 'firebase/firestore'
 
+import { Post } from '@/@types/post'
 import { db } from '@/services/firebase'
-
-interface PostParams {
-	title: string
-	image_url: string
-	body: string
-	tags: string
-	author: string
-	authorId: string
-	createdAt: string
-	updatedAt: string
-}
 
 interface CreatePostParams {
 	title: string
@@ -28,7 +18,7 @@ export async function createPost(data: CreatePostParams) {
 
 	const collectionName = 'posts'
 
-	const post: PostParams = {
+	const post: Post = {
 		...data,
 		author: currentUser.displayName || 'user-from-miniblog',
 		authorId: currentUser.uid,
