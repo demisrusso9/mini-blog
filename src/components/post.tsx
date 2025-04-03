@@ -25,8 +25,8 @@ export function Post({
 
 					<p className="mb-4 text-sm font-thin">por: {author}</p>
 
-					{tags.map((tag) => (
-						<span className="align-middle text-base">
+					{tags.map((tag, i) => (
+						<span className="align-middle text-base" key={i}>
 							<span className="font-bold">#</span>
 							{tag}
 							{'  '}

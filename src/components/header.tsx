@@ -42,8 +42,6 @@ export function Header() {
 		queryFn: getUser
 	})
 
-	console.log({ user })
-
 	return (
 		<header className="flex h-20 items-center justify-between bg-gray-200 p-4">
 			<h1 className="text-2xl">

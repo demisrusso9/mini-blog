@@ -1,4 +1,4 @@
-import { Post } from '@/@types/post'
+import { IPost } from '@/@types/post'
 import { db } from '@/services/firebase'
 import { getAuth } from 'firebase/auth'
 
@@ -17,7 +17,7 @@ export async function getUserPosts() {
 	const posts = querySnapshot.docs.map((post) => {
 		return {
 			id: post.id,
-			...(post.data() as Omit<Post, 'id'>)
+			...(post.data() as Omit<IPost, 'id'>)
 		}
 	})
 

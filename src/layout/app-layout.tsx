@@ -12,8 +12,6 @@ export function AppLayout() {
 		queryFn: getUser
 	})
 
-	console.log({ user })
-
 	if (!user) {
 		navigate('/login')
 	}

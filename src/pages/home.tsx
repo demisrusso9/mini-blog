@@ -1,6 +1,18 @@
+import { getHomepagePosts } from '@/api/get-homepage-posts'
+import { Loading } from '@/components/loading'
 import { Post } from '@/components/post'
+import { useQuery } from '@tanstack/react-query'
 
 export function Home() {
+	const { data: posts } = useQuery({
+		queryKey: ['posts'],
+		queryFn: getHomepagePosts
+	})
+
+	function transformTags(tags: string) {
+		return tags.split(',').map((item) => item.trim())
+	}
+
 	return (
 		<div className="flex w-full flex-col items-center justify-center bg-gray-300 py-12">
 			<h1 className="mb-8 text-4xl font-bold">
@@ -21,16 +33,21 @@ export function Home() {
 				</div>
 
 				<div className="flex flex-col gap-12">
-					{Array.from({ length: 5 }).map(() => (
-						<Post
-							imgUrl="https://images3.alphacoders.com/133/thumb-1920-1334079.png"
-							title="forza motorsport"
-							description="lorem"
-							author="demis"
-							tags={['game', 'xbox', 'abc', 'test', '123']}
-							isHomeView
-						/>
-					))}
+					{posts ? (
+						posts.map((post) => (
+							<Post
+								key={post.createdAt}
+								imgUrl={post.image_url}
+								title={post.title}
+								description={post.body}
+								author={post.author}
+								tags={transformTags(post.tags)}
+								isHomeView
+							/>
+						))
+					) : (
+						<Loading />
+					)}
 				</div>
 			</div>
 		</div>
