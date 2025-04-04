@@ -1,11 +1,20 @@
+import { deletePost } from '@/api/delete-post'
 import { getUserPosts } from '@/api/get-user-posts'
+import { Button } from '@/components/button'
 import { Loading } from '@/components/loading'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 export function Dashboard() {
-	const sortByDate = (date1: string, date2: string) => {
-		return new Date(date1).getTime() - new Date(date2).getTime()
-	}
+	const queryClient = useQueryClient()
+
+	const { data: posts, isLoading } = useQuery({
+		queryKey: ['user-posts'],
+		queryFn: getPosts
+	})
+
+	const { mutateAsync: deletePostFn } = useMutation({
+		mutationFn: deletePost
+	})
 
 	async function getPosts() {
 		const data = await getUserPosts()
@@ -17,10 +26,14 @@ export function Dashboard() {
 		return posts
 	}
 
-	const { data: posts, isLoading } = useQuery({
-		queryKey: ['user-posts'],
-		queryFn: getPosts
-	})
+	const sortByDate = (date1: string, date2: string) => {
+		return new Date(date1).getTime() - new Date(date2).getTime()
+	}
+
+	async function handleDelete(postId: string) {
+		await deletePostFn(postId)
+		queryClient.invalidateQueries({ queryKey: ['user-posts'] })
+	}
 
 	return (
 		<div className="flex w-full flex-col items-center justify-center bg-gray-300 px-10 py-10">
@@ -43,17 +56,15 @@ export function Dashboard() {
 						<p className="flex flex-1">{post.title}</p>
 
 						<div className="flex gap-3">
-							<button className="w-26 cursor-pointer rounded-sm border p-2 hover:bg-black hover:text-gray-100">
-								Ver
-							</button>
+							<Button title="Ver" isLoading={false} onClick={() => {}} />
 
-							<button className="w-26 cursor-pointer rounded-sm border p-2 hover:bg-black hover:text-gray-100">
-								Editar
-							</button>
+							<Button title="Editar" isLoading={false} onClick={() => {}} />
 
-							<button className="w-26 cursor-pointer rounded-sm border p-2 hover:bg-black hover:text-gray-100">
-								Excluir
-							</button>
+							<Button
+								title="Excluir"
+								isLoading={false}
+								onClick={() => handleDelete(post.id)}
+							/>
 						</div>
 					</div>
 				))
