@@ -1,5 +1,5 @@
-import { AppLayout } from '@/layout/app-layout'
-import { AuthLayout } from '@/layout/auth-layout'
+import { ProtectedLayout } from '@/layouts/protected-layout'
+import { PublicLayout } from '@/layouts/public-layout'
 import { About } from '@/pages/about'
 import { Dashboard } from '@/pages/dashboard'
 import { Home } from '@/pages/home'
@@ -15,12 +15,12 @@ export function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route element={<AppLayout />}>
+				<Route element={<ProtectedLayout />}>
 					<Route path="/create-post" element={<Posts />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>
 
-				<Route element={<AuthLayout />}>
+				<Route element={<PublicLayout />}>
 					<Route path="/" element={<Home />} />
 					<Route path="/post/:id" element={<ViewPost />} />
 					<Route path="/login" element={<Login />} />

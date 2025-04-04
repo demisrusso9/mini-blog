@@ -1,3 +1,4 @@
+import { AuthProvider } from '@/contexts/auth-context'
 import { AppRoutes } from '@/routes'
 import { queryClient } from '@/services/react-query'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -6,9 +7,11 @@ import { Bounce, ToastContainer } from 'react-toastify'
 function App() {
 	return (
 		<>
-			<QueryClientProvider client={queryClient}>
-				<AppRoutes />
-			</QueryClientProvider>
+			<AuthProvider>
+				<QueryClientProvider client={queryClient}>
+					<AppRoutes />
+				</QueryClientProvider>
+			</AuthProvider>
 
 			<ToastContainer
 				position="top-center"

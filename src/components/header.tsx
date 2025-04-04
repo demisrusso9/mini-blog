@@ -1,6 +1,5 @@
-import { getUser } from '@/api/get-user'
 import { signOutUser } from '@/api/sign-out-user'
-import { useQuery } from '@tanstack/react-query'
+import { useAuth } from '@/contexts/auth-context'
 import { NavLink, useNavigate } from 'react-router'
 
 interface NavLinks {
@@ -10,6 +9,8 @@ interface NavLinks {
 }
 
 export function Header() {
+	const { user } = useAuth()
+
 	const navLinkCss =
 		'rounded-sm p-0 hover:p-0 hover:text-gray-500 cursor-pointer'
 
@@ -36,11 +37,6 @@ export function Header() {
 		await signOutUser()
 		navigate('/login', { replace: true })
 	}
-
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: getUser
-	})
 
 	return (
 		<header className="flex h-20 items-center justify-between bg-gray-200 p-4">
