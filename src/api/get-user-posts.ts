@@ -16,8 +16,8 @@ export async function getUserPosts() {
 
 	const posts = querySnapshot.docs.map((post) => {
 		return {
-			id: post.id,
-			...(post.data() as Omit<IPost, 'id'>)
+			...(post.data() as IPost),
+			id: post.id
 		}
 	})
 

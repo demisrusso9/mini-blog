@@ -7,7 +7,12 @@ export async function getHomepagePosts() {
 	const data = query(collection(db, 'posts'))
 	const querySnapshot = await getDocs(data)
 
-	const posts = querySnapshot.docs.map((item) => item.data() as IPost)
+	const posts = querySnapshot.docs.map((post) => {
+		return {
+			...(post.data() as IPost),
+			id: post.id
+		}
+	})
 
 	return posts || []
 }

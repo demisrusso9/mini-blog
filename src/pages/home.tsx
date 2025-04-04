@@ -9,10 +9,6 @@ export function Home() {
 		queryFn: getHomepagePosts
 	})
 
-	function transformTags(tags: string) {
-		return tags.split(',').map((item) => item.trim())
-	}
-
 	return (
 		<div className="flex w-full flex-col items-center justify-center bg-gray-300 py-12">
 			<h1 className="mb-8 text-4xl font-bold">
@@ -34,17 +30,7 @@ export function Home() {
 
 				<div className="flex flex-col gap-12">
 					{posts ? (
-						posts.map((post) => (
-							<Post
-								key={post.createdAt}
-								imgUrl={post.image_url}
-								title={post.title}
-								description={post.body}
-								author={post.author}
-								tags={transformTags(post.tags)}
-								isHomeView
-							/>
-						))
+						posts.map((post) => <Post key={post.id} post={post} />)
 					) : (
 						<Loading />
 					)}

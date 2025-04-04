@@ -1,11 +1,14 @@
+import { IPost } from '@/@types/post'
 import { deletePost } from '@/api/delete-post'
 import { getUserPosts } from '@/api/get-user-posts'
 import { Button } from '@/components/button'
 import { Loading } from '@/components/loading'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useNavigate } from 'react-router'
 
 export function Dashboard() {
 	const queryClient = useQueryClient()
+	const navigate = useNavigate()
 
 	const { data: posts, isLoading } = useQuery({
 		queryKey: ['user-posts'],
@@ -28,6 +31,10 @@ export function Dashboard() {
 
 	const sortByDate = (date1: string, date2: string) => {
 		return new Date(date1).getTime() - new Date(date2).getTime()
+	}
+
+	function handleView(post: IPost) {
+		navigate(`/post/${post.id}`, { state: post })
 	}
 
 	async function handleDelete(postId: string) {
@@ -56,7 +63,11 @@ export function Dashboard() {
 						<p className="flex flex-1">{post.title}</p>
 
 						<div className="flex gap-3">
-							<Button title="Ver" isLoading={false} onClick={() => {}} />
+							<Button
+								title="Ver"
+								isLoading={false}
+								onClick={() => handleView(post)}
+							/>
 
 							<Button title="Editar" isLoading={false} onClick={() => {}} />
 
