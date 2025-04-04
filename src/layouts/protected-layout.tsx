@@ -1,7 +1,7 @@
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { Loading } from '@/components/loading'
-import { useAuth } from '@/context/auth-context'
+import { useAuth } from '@/contexts/auth-context'
 import { useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router'
 
