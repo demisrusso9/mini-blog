@@ -1,11 +1,14 @@
 import { createPost } from '@/api/create-post'
-import { CreatePost, CreatePostFieldsProps } from '@/components/create-post'
+import {
+	CreatePostForm,
+	CreatePostFormFieldsProps
+} from '@/components/create-post-form'
 import { useNavigate } from 'react-router'
 
 export function Posts() {
 	const navigate = useNavigate()
 
-	async function handleSubmitForm(data: CreatePostFieldsProps) {
+	async function handleSubmitForm(data: CreatePostFormFieldsProps) {
 		try {
 			await createPost(data)
 			navigate('/dashboard')
@@ -23,7 +26,7 @@ export function Posts() {
 				mundo!
 			</p>
 
-			<CreatePost handleSubmitForm={handleSubmitForm} />
+			<CreatePostForm handleSubmitForm={handleSubmitForm} />
 		</div>
 	)
 }

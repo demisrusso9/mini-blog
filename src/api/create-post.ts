@@ -18,7 +18,7 @@ export async function createPost(data: CreatePostParams) {
 
 	const collectionName = 'posts'
 
-	const post: IPost = {
+	const post: Omit<IPost, 'id'> = {
 		...data,
 		author: currentUser.displayName || 'user-from-miniblog',
 		authorId: currentUser.uid,

@@ -2,6 +2,7 @@ import { ProtectedLayout } from '@/layouts/protected-layout'
 import { PublicLayout } from '@/layouts/public-layout'
 import { About } from '@/pages/about'
 import { Dashboard } from '@/pages/dashboard'
+import { EditPost } from '@/pages/edit-post'
 import { Home } from '@/pages/home'
 import { Login } from '@/pages/login'
 import { NotFound } from '@/pages/not-found'
@@ -16,6 +17,7 @@ export function AppRoutes() {
 		<BrowserRouter>
 			<Routes>
 				<Route element={<ProtectedLayout />}>
+					<Route path="/post/edit/:id" element={<EditPost />} />
 					<Route path="/create-post" element={<Posts />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>

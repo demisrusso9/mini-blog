@@ -3,10 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-export type CreatePostFieldsProps = z.infer<typeof postSchema>
+export type CreatePostFormFieldsProps = z.infer<typeof postSchema>
 
-interface CreatePostProps {
-	handleSubmitForm(data: CreatePostFieldsProps): void
+interface CreatePostFormProps {
+	handleSubmitForm(data: CreatePostFormFieldsProps): void
 }
 
 interface FormFieldMap {
@@ -16,7 +16,7 @@ interface FormFieldMap {
 	placeholder: string
 }
 
-export function CreatePost({ handleSubmitForm }: CreatePostProps) {
+export function CreatePostForm({ handleSubmitForm }: CreatePostFormProps) {
 	const {
 		handleSubmit,
 		register,

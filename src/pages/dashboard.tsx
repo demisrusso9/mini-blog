@@ -3,6 +3,7 @@ import { deletePost } from '@/api/delete-post'
 import { getUserPosts } from '@/api/get-user-posts'
 import { Button } from '@/components/button'
 import { Loading } from '@/components/loading'
+import { sortByDate } from '@/utils/sortByDate'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router'
 
@@ -29,11 +30,11 @@ export function Dashboard() {
 		return posts
 	}
 
-	const sortByDate = (date1: string, date2: string) => {
-		return new Date(date1).getTime() - new Date(date2).getTime()
+	function handleEditPost(post: IPost) {
+		navigate(`/post/edit/${post.id}`, { state: post })
 	}
 
-	function handleView(post: IPost) {
+	function handleViewPost(post: IPost) {
 		navigate(`/post/${post.id}`, { state: post })
 	}
 
@@ -66,10 +67,14 @@ export function Dashboard() {
 							<Button
 								title="Ver"
 								isLoading={false}
-								onClick={() => handleView(post)}
+								onClick={() => handleViewPost(post)}
 							/>
 
-							<Button title="Editar" isLoading={false} onClick={() => {}} />
+							<Button
+								title="Editar"
+								isLoading={false}
+								onClick={() => handleEditPost(post)}
+							/>
 
 							<Button
 								title="Excluir"
