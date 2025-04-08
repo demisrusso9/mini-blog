@@ -4,9 +4,12 @@ import {
 	RegisterFormFieldsProps
 } from '@/components/register-form'
 import { FirebaseError } from 'firebase/app'
+import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 
 export function Register() {
+	const navigate = useNavigate()
+
 	async function handleSubmitForm({
 		name,
 		email,
@@ -14,6 +17,7 @@ export function Register() {
 	}: RegisterFormFieldsProps) {
 		try {
 			await createUser({ name, email, password })
+			navigate('/dashboard', { replace: true })
 		} catch (error: unknown) {
 			if (error instanceof FirebaseError) {
 				if (error.code === 'auth/email-already-in-use') {
