@@ -1,13 +1,27 @@
 import { getHomepagePosts } from '@/api/get-homepage-posts'
-import { Loading } from '@/components/loading'
 import { Post } from '@/components/post'
+import { transformTags } from '@/utils/transformTags'
 import { useQuery } from '@tanstack/react-query'
+import { useMemo, useState } from 'react'
 
 export function Home() {
 	const { data: posts } = useQuery({
 		queryKey: ['posts'],
 		queryFn: getHomepagePosts
 	})
+
+	const [search, setSearch] = useState('')
+
+	const filteredPosts = useMemo(() => {
+		if (!search) return posts || []
+
+		return (
+			posts?.filter((post) => {
+				const tags = transformTags(post.tags)
+				return tags.includes(search)
+			}) || []
+		)
+	}, [posts, search])
 
 	return (
 		<div className="flex w-full flex-col items-center justify-center bg-gray-300 py-12">
@@ -21,18 +35,16 @@ export function Home() {
 						className="flex-1 border-0 border-b-1 px-0 py-2 placeholder:font-thin focus:outline-0"
 						type="text"
 						placeholder="ou busque por tags..."
+						value={search}
+						onChange={(e) => setSearch(e.currentTarget.value)}
 					/>
-
-					<button className="cursor-pointer rounded-sm border bg-black p-2 text-gray-100">
-						Pesquisar
-					</button>
 				</div>
 
 				<div className="flex flex-col gap-12">
-					{posts ? (
-						posts.map((post) => <Post key={post.id} post={post} />)
+					{filteredPosts.length > 0 ? (
+						filteredPosts.map((post) => <Post key={post.id} post={post} />)
 					) : (
-						<Loading />
+						<p className="text-center text-gray-500">Nenhum post encontrado.</p>
 					)}
 				</div>
 			</div>
