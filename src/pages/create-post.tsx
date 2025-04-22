@@ -5,7 +5,7 @@ import {
 } from '@/components/create-post-form'
 import { useNavigate } from 'react-router'
 
-export function Posts() {
+export function CreatePost() {
 	const navigate = useNavigate()
 
 	async function handleSubmitForm(data: CreatePostFormFieldsProps) {

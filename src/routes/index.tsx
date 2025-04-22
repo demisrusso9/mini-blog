@@ -1,12 +1,12 @@
 import { ProtectedLayout } from '@/layouts/protected-layout'
 import { PublicLayout } from '@/layouts/public-layout'
 import { About } from '@/pages/about'
+import { CreatePost } from '@/pages/create-post'
 import { Dashboard } from '@/pages/dashboard'
 import { EditPost } from '@/pages/edit-post'
 import { Home } from '@/pages/home'
 import { Login } from '@/pages/login'
 import { NotFound } from '@/pages/not-found'
-import { Posts } from '@/pages/posts'
 import { Register } from '@/pages/register'
 import { ViewPost } from '@/pages/view-post'
 
@@ -18,7 +18,7 @@ export function AppRoutes() {
 			<Routes>
 				<Route element={<ProtectedLayout />}>
 					<Route path="/post/edit/:id" element={<EditPost />} />
-					<Route path="/create-post" element={<Posts />} />
+					<Route path="/create-post" element={<CreatePost />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>
 
