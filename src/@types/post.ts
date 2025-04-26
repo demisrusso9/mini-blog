@@ -8,4 +8,12 @@ export interface IPost {
 	authorId: string
 	createdAt: string
 	updatedAt: string
+	comments: {
+		id: string
+		user_id: string
+		user_photo: string | null
+		username: string | null
+		body: string
+		createdAt: string
+	}[]
 }

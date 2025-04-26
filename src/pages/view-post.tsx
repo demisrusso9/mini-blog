@@ -1,4 +1,5 @@
 import { IPost } from '@/@types/post'
+import { Comments } from '@/components/comments'
 import { transformTags } from '@/utils/transformTags'
 import { useLocation } from 'react-router'
 
@@ -26,6 +27,8 @@ export function ViewPost() {
 						</span>
 					))}
 				</div>
+
+				<Comments post={post} />
 			</section>
 		</div>
 	)

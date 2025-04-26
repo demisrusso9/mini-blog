@@ -23,7 +23,8 @@ export async function createPost(data: CreatePostParams) {
 		author: currentUser.displayName || 'user-from-miniblog',
 		authorId: currentUser.uid,
 		createdAt: new Date().toISOString(),
-		updatedAt: new Date().toISOString()
+		updatedAt: new Date().toISOString(),
+		comments: []
 	}
 
 	await addDoc(collection(db, collectionName), post)
