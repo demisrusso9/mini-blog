@@ -6,6 +6,14 @@ interface DeleteCommentParams {
 	commentId: string
 }
 
+/**
+ * Deletes a comment from a specific post in the Firestore database.
+ *
+ * @param params - The parameters required to delete a comment.
+ * @param params.postId - The ID of the post from which the comment will be deleted.
+ * @param params.commentId - The ID of the comment to be deleted.
+ * @returns A promise that resolves when the comment has been removed and the post updated.
+ */
 export async function deleteComment({
 	postId,
 	commentId
