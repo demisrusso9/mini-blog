@@ -9,11 +9,16 @@
     }
   ],
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     }
-  }
+  },
+  "include": [
+    "./jest.config.ts"
+  ],
 }

@@ -28,9 +28,13 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "composite": true,
   },
   "include": [
-    "src"
+    "src",
+    "jest.config.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
   ]
 }
