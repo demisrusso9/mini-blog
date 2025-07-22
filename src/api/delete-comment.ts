@@ -18,8 +18,10 @@ export async function deleteComment({
 	if (docSnap.exists()) {
 		const postData = docSnap.data()
 
+		if (!postData.comments) return
+
 		const updatedComments = postData.comments.filter(
-			(comment: { id: string }) => comment.id !== commentId
+			(comment: { id?: string }) => comment?.id !== commentId
 		)
 
 		await updateDoc(docRef, {
