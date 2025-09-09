@@ -4,7 +4,15 @@ import { getAuth } from 'firebase/auth'
 
 import { collection, getDocs, query, where } from 'firebase/firestore'
 
-export async function getUserPosts() {
+/**
+ * Retrieves all posts authored by the currently authenticated user.
+ *
+ * @async
+ * @returns {Promise<IPost[]>} A promise that resolves to an array of posts authored by the current user, each including its document ID.
+ *
+ * @throws Will throw an error if the user is not authenticated or if the Firestore query fails.
+ */
+export async function getUserPosts(): Promise<IPost[]> {
 	const { currentUser } = getAuth()
 
 	const userPosts = query(
